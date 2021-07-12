@@ -1,20 +1,31 @@
 package iloveyouboss_02.src.iloveyouboss;
 
+import org.junit.Before;
 import org.junit.Test;
+
 import static org.junit.Assert.*;
 import static org.hamcrest.CoreMatchers.*;
 
 public class ProfileTest {
 
+    private Profile profile;
+    private BooleanQuestion question;
+    private Criteria criteria;
+
+    @Before
+    public void create() {
+        profile = new Profile("Bull Hockey, Inc");
+        question = new BooleanQuestion(1, "Got Bonused?");
+        criteria = new Criteria();
+    }
+
     @Test
     public void matchAnswersFalseWhenMustMatchCriteriaNotMet() {
-        Profile profile = new Profile("Alla ");
-        Question question = new BooleanQuestion(1, "Got bonuses?");
-        Answer profileAnswer = new Answer(question, Bool.FALSE);
-        profile.add(profileAnswer);
-        Criteria criteria = new Criteria();
-        Answer criteriaAnswer = new Answer(question, Bool.TRUE);
-        Criterion criterion = new Criterion(criteriaAnswer, Weight.MustMatch);
+
+        profile.add(new Answer(question, Bool.FALSE));
+        Criterion criterion = new Criterion(
+                new Answer(question, Bool.TRUE),
+                Weight.MustMatch);
         criteria.add(criterion);
 
         boolean matches = profile.matches(criteria);
@@ -25,17 +36,44 @@ public class ProfileTest {
 
     @Test
     public void matchAnswersTrueForAnyDontCareCriteria() {
-        Profile profile = new Profile("Bull Hockey, Inc.");
-        Question question = new BooleanQuestion(1, "Got milk?");
-        Answer profileAnswer = new Answer(question, Bool.FALSE);
-        profile.add(profileAnswer);
-        Criteria criteria = new Criteria();
-        Answer criteriaAnswer = new Answer(question, Bool.TRUE);
-        Criterion criterion = new Criterion(criteriaAnswer, Weight.DontCare);
+
+        profile.add(new Answer(question, Bool.FALSE));
+        Criterion criterion = new Criterion(
+                new Answer(question, Bool.TRUE),
+                Weight.DontCare);
         criteria.add(criterion);
 
         boolean matches = profile.matches(criteria);
 
         assertTrue(matches);
+    }
+
+    @Test
+    public void matchAnswersFalseWhenCriteriaIsEmtpty() {
+
+        profile.add(new Answer(question, Bool.FALSE));
+        boolean matches = profile.matches(criteria);
+        assertFalse(matches);
+
+    }
+
+    @Test(expected = NullPointerException.class)
+    public void throwNpeWhenProfileAnswerIsNull() {
+        profile.add(null);
+        Criterion criterion = new Criterion(
+                new Answer(question, Bool.TRUE),
+                Weight.DontCare);
+        criteria.add(criterion);
+        boolean matches = profile.matches(criteria);
+    }
+
+    @Test(expected = NullPointerException.class)
+    public void throwNpewhenCriterionAnswerIsNUll() {
+        profile.add(new Answer(question, Bool.FALSE));
+        Criterion criterion = new Criterion(
+                null, Weight.MustMatch
+        );
+        criteria.add(criterion);
+        boolean matches = profile.matches(criteria);
     }
 }
