@@ -1,10 +1,9 @@
-package iloveyouboss_02.src.iloveyouboss;
+package ch02.src.main;
 
 import org.junit.Before;
 import org.junit.Test;
 
 import static org.junit.Assert.*;
-import static org.hamcrest.CoreMatchers.*;
 
 public class ProfileTest {
 

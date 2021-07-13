@@ -1,4 +1,4 @@
-package iloveyouboss_01.src.iloveyouboss;
+package ch01.src.main;
 
 import org.junit.Test;
 import static org.junit.Assert.*;

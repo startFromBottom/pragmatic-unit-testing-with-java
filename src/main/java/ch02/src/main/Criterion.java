@@ -1,6 +1,6 @@
-package iloveyouboss_02.src.iloveyouboss;
+package ch02.src.main;
 
-import iloveyouboss_01.src.iloveyouboss.Scoreable;
+import ch01.src.main.Scoreable;
 
 public class Criterion implements Scoreable {
     private Weight weight;

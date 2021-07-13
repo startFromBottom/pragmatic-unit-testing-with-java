@@ -1,4 +1,4 @@
-package iloveyouboss_02.src.iloveyouboss;
+package ch02.src.main;
 
 public enum Weight {
     MustMatch(Integer.MAX_VALUE),

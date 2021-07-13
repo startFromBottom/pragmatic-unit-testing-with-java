@@ -1,4 +1,4 @@
-package iloveyouboss_02.src.iloveyouboss;
+package ch02.src.main;
 
 import java.util.*;
 
