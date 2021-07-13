@@ -26,7 +26,7 @@ public class Profile {
         boolean anyMatches = false;
         for (Criterion criterion: criteria) {
             Answer answer = answers.get(
-                    criterion.getAnswer().getQuestionText());
+            criterion.getAnswer().getQuestionText());
             boolean match =
                     criterion.getWeight() == Weight.DontCare ||
                             answer.match(criterion.getAnswer());

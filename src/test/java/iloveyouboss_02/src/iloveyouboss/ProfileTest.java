@@ -68,7 +68,7 @@ public class ProfileTest {
     }
 
     @Test(expected = NullPointerException.class)
-    public void throwNpewhenCriterionAnswerIsNUll() {
+    public void throwNpewhenCriterionAnswerIsNull() {
         profile.add(new Answer(question, Bool.FALSE));
         Criterion criterion = new Criterion(
                 null, Weight.MustMatch
